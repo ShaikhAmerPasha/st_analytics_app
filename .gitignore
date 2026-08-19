@@ -5,3 +5,8 @@
 tags
 node_modules
 __pycache__
+
+# Firebase service account keys — never commit
+*firebase*.json
+*service-account*.json
+*-sa.json
