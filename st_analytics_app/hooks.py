@@ -8,7 +8,7 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["st_attendance_tracker", "hrms"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -137,13 +137,22 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Employee Checkin": {
+		"after_insert": "st_analytics_app.notifications_events.on_employee_checkin",
+	},
+	"Daily Task": {
+		"after_insert": "st_analytics_app.notifications_events.on_daily_task_created",
+		"on_update": "st_analytics_app.notifications_events.on_daily_task_status_change",
+		"on_trash": "st_analytics_app.notifications_events.on_daily_task_deleted",
+	},
+	"Attendance": {
+		"on_submit": "st_analytics_app.notifications_events.on_attendance_submit",
+	},
+	"Leave Application": {
+		"on_submit": "st_analytics_app.notifications_events.on_leave_application_submit",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
